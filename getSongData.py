@@ -1,6 +1,6 @@
 # getSongData.py
 # gets song data based on country
-# Charlie Jindra and Seth Haugland 2/19/2020
+# Charlie Jindra and Seth Haugland 2/28/2020
 
 import os
 import spotipy
@@ -28,7 +28,10 @@ countryFile = open("countryCodes.txt", "r")
 
 # do this for every country
 for line in countryFile:
+    print("Country: {}".format(line))
+    line = line.strip("\n")
     results = spotifyObj.new_releases(country=line, limit=20, offset=0)
+
 
     #add all the album ids to one place (albumList) so we can make api calls for the track ids
     albumList = []
@@ -88,7 +91,7 @@ for line in countryFile:
             #print(item[i]['tempo'])
             #print(json.dumps(item, indent=4))
             isAnObject = False
-            print("getting song {} of {}...".format(amount+1, len(songList)))
+            #print("getting song {} of {}...".format(amount+1, len(songList)))
 
             #add all these to the totals for the country
             #we'll try to access it, if a value doesn't exist we won't count the song towards the total
@@ -137,7 +140,7 @@ for line in countryFile:
         }
 
     #finally print the averages with the country code as its name!
-    countryWrite = open("{}.txt".format(line), "a")
+    countryWrite = open("data/{}.txt".format(line), "w+")
 
     for item in avgFeatures:
         countryWrite.write(str(avgFeatures[item]) + "\n")
