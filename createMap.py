@@ -35,7 +35,7 @@ while True:
     revenue = pd.read_excel(choices[int(choice_map) - 1] + '.xlsx')
 
     # GETS WORLD LOCATIONS, NAMES, AND 3 DIGIT WORLD NUMBERS
-    world = world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+    world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
 
     for_plotting = world.merge(revenue, left_on = 'iso_a3', right_on = 'Country Code')
